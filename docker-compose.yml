@@ -1,0 +1,32 @@
+services:
+  atlas:
+    build: .
+    environment:
+      ATLAS_DATA_DIR: /data
+      ATLAS_PORT: ${ATLAS_PORT:-8000}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      ATLAS_GEMINI_MODEL: ${ATLAS_GEMINI_MODEL:-gemini-flash-latest}
+      ATLAS_GEMINI_TEMPERATURE: ${ATLAS_GEMINI_TEMPERATURE:-0.2}
+      ATLAS_GEMINI_TIMEOUT_SECONDS: ${ATLAS_GEMINI_TIMEOUT_SECONDS:-45}
+      ATLAS_GEMINI_MAX_OUTPUT_TOKENS: ${ATLAS_GEMINI_MAX_OUTPUT_TOKENS:-2048}
+      ATLAS_GEMINI_INPUT_PRICE_PER_MILLION_USD: ${ATLAS_GEMINI_INPUT_PRICE_PER_MILLION_USD:-}
+      ATLAS_GEMINI_OUTPUT_PRICE_PER_MILLION_USD: ${ATLAS_GEMINI_OUTPUT_PRICE_PER_MILLION_USD:-}
+    volumes:
+      - ./atlas-data:/data
+    ports:
+      - "127.0.0.1:${ATLAS_PORT:-8000}:${ATLAS_PORT:-8000}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:' + __import__('os').environ.get('ATLAS_PORT', '8000') + '/health/ready', timeout=2)"
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped

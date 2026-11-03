@@ -1,0 +1,8 @@
+{
+  "plan_id": "sequential-smoke",
+  "task_id": "smoke-task",
+  "nodes": [
+    {"node_id": "start", "kind": "join", "name": "Start"},
+    {"node_id": "finish", "kind": "output", "name": "Finish", "depends_on": ["start"]}
+  ]
+}

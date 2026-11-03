@@ -1,0 +1,12 @@
+{
+  "plan_id": "fanout-join-smoke",
+  "task_id": "smoke-task",
+  "nodes": [
+    {"node_id": "start", "kind": "join", "name": "Start"},
+    {"node_id": "left", "kind": "condition", "name": "Left branch", "depends_on": ["start"]},
+    {"node_id": "right", "kind": "condition", "name": "Right branch", "depends_on": ["start"]},
+    {"node_id": "merge", "kind": "join", "name": "Join branches", "depends_on": ["left", "right"]},
+    {"node_id": "finish", "kind": "output", "name": "Finish", "depends_on": ["merge"]}
+  ],
+  "max_parallelism": 2
+}

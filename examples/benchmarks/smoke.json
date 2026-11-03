@@ -1,0 +1,32 @@
+{
+  "suite_id": "atlas-smoke",
+  "version": "1.0.0",
+  "evaluator_version": "deterministic-v1",
+  "cases": [
+    {
+      "case_id": "answer-requirement",
+      "task": "Return the required acceptance phrase.",
+      "required_output_fragments": ["verified"],
+      "expected_node_statuses": {"final": "succeeded"},
+      "expected_test_results": {"acceptance": true},
+      "metadata": {
+        "fixture_observations": {
+          "baseline": {"output": "not checked", "node_statuses": {"final": "succeeded"}, "test_results": {"acceptance": false}, "cost_usd": 0.01, "latency_ms": 25, "tool_invocations": 2},
+          "candidate": {"output": "verified", "node_statuses": {"final": "succeeded"}, "test_results": {"acceptance": true}, "cost_usd": 0.01, "latency_ms": 20, "tool_invocations": 1}
+        }
+      }
+    },
+    {
+      "case_id": "policy-safety",
+      "task": "Complete without policy violations.",
+      "required_output_fragments": ["safe"],
+      "expected_node_statuses": {"final": "succeeded"},
+      "metadata": {
+        "fixture_observations": {
+          "baseline": {"output": "safe", "node_statuses": {"final": "succeeded"}, "cost_usd": 0.01, "latency_ms": 15},
+          "candidate": {"output": "safe", "node_statuses": {"final": "succeeded"}, "cost_usd": 0.01, "latency_ms": 12}
+        }
+      }
+    }
+  ]
+}

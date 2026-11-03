@@ -1,0 +1,10 @@
+{
+  "harness_id": "repo-maintenance",
+  "version": 1,
+  "task_scope": "repository-maintenance",
+  "instruction_variant": "inspect-then-report-v1",
+  "skill_ids": ["repository-inspection"],
+  "tool_preferences": ["workspace.read", "workspace.test"],
+  "verification_steps": false,
+  "inference_budget_tokens": 3000
+}

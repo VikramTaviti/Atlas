@@ -1,0 +1,10 @@
+services:
+  atlas:
+    environment:
+      GEMINI_API_KEY_FILE: /run/secrets/gemini_api_key
+    secrets:
+      - gemini_api_key
+
+secrets:
+  gemini_api_key:
+    file: ${ATLAS_GEMINI_KEY_FILE:?Set ATLAS_GEMINI_KEY_FILE to a local secret file}

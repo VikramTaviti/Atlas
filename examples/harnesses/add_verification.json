@@ -1,0 +1,10 @@
+{
+  "base_harness_id": "repo-maintenance",
+  "rationale": "Require a deterministic verification step before reporting completion.",
+  "evidence_report_ids": ["atlas-smoke-baseline-fixture"],
+  "instruction_variant": "inspect-verify-then-report-v2",
+  "skill_ids": ["repository-inspection", "verification"],
+  "tool_preferences": ["workspace.read", "workspace.test"],
+  "verification_steps": true,
+  "inference_budget_tokens": 3000
+}
